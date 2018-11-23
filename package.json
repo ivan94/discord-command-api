@@ -1,5 +1,5 @@
 {
-  "name": "discord-commands",
+  "name": "discord-commands-api",
   "version": "0.1.0",
   "description": "A simple architecture for commands of a discord bot",
   "main": "dist/index.js",
