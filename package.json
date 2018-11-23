@@ -2,8 +2,8 @@
   "name": "discord-command-api",
   "version": "0.1.1",
   "description": "A simple architecture for commands of a discord bot",
-  "main": "dist/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "dist/src/index.js",
+  "types": "dist/types/src/index.d.ts",
   "directories": {
     "test": "dist/test"
   },
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ivan94/discord-commands.git"
+    "url": "git+https://github.com/ivan94/discord-command-api.git"
   },
   "keywords": [
     "discord",
@@ -30,9 +30,9 @@
   "author": "ivan94",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ivan94/discord-commands/issues"
+    "url": "https://github.com/ivan94/discord-command-api/issues"
   },
-  "homepage": "https://github.com/ivan94/discord-commands#readme",
+  "homepage": "https://github.com/ivan94/discord-command-api#readme",
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.5",
