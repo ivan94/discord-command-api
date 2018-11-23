@@ -1,0 +1,35 @@
+{
+  "name": "discord-commands",
+  "version": "0.0.1",
+  "description": "A simple architecture for commands of a discord bot",
+  "main": "src/index.ts",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha --require ts-node/register --watch-extensions ts,tsx \"test/**/*.{ts,tsx}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivan94/discord-commands.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "commands"
+  ],
+  "author": "ivan94",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivan94/discord-commands/issues"
+  },
+  "homepage": "https://github.com/ivan94/discord-commands#readme",
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.6"
+  }
+}
