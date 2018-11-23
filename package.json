@@ -2,12 +2,14 @@
   "name": "discord-commands",
   "version": "0.0.1",
   "description": "A simple architecture for commands of a discord bot",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "mocha --require ts-node/register --watch-extensions ts,tsx \"test/**/*.{ts,tsx}\""
+    "test": "mocha --require ts-node/register --watch-extensions ts,tsx \"test/**/*.{ts,tsx}\"",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",

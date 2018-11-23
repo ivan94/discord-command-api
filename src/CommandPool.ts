@@ -42,7 +42,7 @@ export default class CommandPool<BotRef> {
     private buildArgs(command: ICommand<BotRef>, words: string[]): object {
         try {
             let signature = command.signature();
-            let args = {};
+            let args: {[name: string]: string | boolean | number} = {};
             if(signature.length != (words.length - 1)){
                 throw new InvalidCallError("Arguments don't match the signature");
             }
