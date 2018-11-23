@@ -1,11 +1,11 @@
 {
   "name": "discord-commands",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A simple architecture for commands of a discord bot",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "directories": {
-    "test": "tests"
+    "test": "dist/test"
   },
   "scripts": {
     "setup": "npm install",
@@ -28,7 +28,7 @@
     "commands"
   ],
   "author": "ivan94",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ivan94/discord-commands/issues"
   },
