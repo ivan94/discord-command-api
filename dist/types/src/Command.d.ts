@@ -8,9 +8,10 @@ export interface ArgSignature {
     description: string;
     type: ArgType;
 }
-export default interface ICommand<BotRef> {
+export default abstract class Command<BotRef> {
     readonly keyword: string;
-    signature(): ArgSignature[];
-    execute(args: object, ref: BotRef): void;
+    constructor(keyword: string);
+    abstract signature(): ArgSignature[];
+    abstract execute(args: object, ref: BotRef): void;
     description(): string;
 }

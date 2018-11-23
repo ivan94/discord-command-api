@@ -1,7 +1,8 @@
 "use strict";
 exports.__esModule = true;
-var ICommand_1 = require("./ICommand");
-exports.ArgType = ICommand_1.ArgType;
+var Command_1 = require("./Command");
+exports.ICommand = Command_1["default"];
+exports.ArgType = Command_1.ArgType;
 var CommandPool_1 = require("./CommandPool");
 exports.CommandPool = CommandPool_1["default"];
 var Errors_1 = require("./Errors");

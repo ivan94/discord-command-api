@@ -1,6 +1,19 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 exports.__esModule = true;
-var ICommand_1 = require("../src/ICommand");
+var Command_1 = require("../src/Command");
 var chai_1 = require("chai");
 var CommandPool_1 = require("../src/CommandPool");
 chai_1.should();
@@ -10,26 +23,27 @@ var Mock = (function () {
     return Mock;
 }());
 ;
-var TestCommand = (function () {
+var TestCommand = (function (_super) {
+    __extends(TestCommand, _super);
     function TestCommand(keyword) {
-        this.keyword = keyword;
+        return _super.call(this, keyword) || this;
     }
     TestCommand.prototype.signature = function () {
         return [
             {
                 name: 'arg1',
                 description: 'The first arg',
-                type: ICommand_1.ArgType.STRING
+                type: Command_1.ArgType.STRING
             },
             {
                 name: 'arg2',
                 description: 'The second arg',
-                type: ICommand_1.ArgType.NUMBER
+                type: Command_1.ArgType.NUMBER
             },
             {
                 name: 'arg3',
                 description: 'The third arg',
-                type: ICommand_1.ArgType.BOOLEAN
+                type: Command_1.ArgType.BOOLEAN
             }
         ];
     };
@@ -40,7 +54,7 @@ var TestCommand = (function () {
         bot.result3 = arg3;
     };
     return TestCommand;
-}());
+}(Command_1["default"]));
 describe("Testing the command pool", function () {
     var bot = new Mock;
     var command = new TestCommand("test");

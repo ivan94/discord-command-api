@@ -1,4 +1,4 @@
-import ICommand from "./ICommand";
+import ICommand from "./Command";
 export interface CommandPoolEntries<BotRef> {
     [keyword: string]: ICommand<BotRef>;
 }

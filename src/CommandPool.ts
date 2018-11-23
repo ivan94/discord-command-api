@@ -1,4 +1,4 @@
-import ICommand, { ArgType } from "./ICommand";
+import ICommand, { ArgType } from "./Command";
 import { KeywordBoundError, InvalidCallError, InvalidTypeError } from "./Errors";
 
 export interface CommandPoolEntries<BotRef> {

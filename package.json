@@ -14,7 +14,7 @@
     "test-only": "mocha dist/test/",
     "pretest": "npm run build",
     "test": "npm run test-only",
-    "clean": "shx rm -rf node_modules/ dist/ docs/",
+    "clean": "shx rm -rf dist/ docs/",
     "typedoc": "typedoc --out ./docs --mode modules --tsconfig ./tsconfig.json ./src/",
     "posttypedoc": "shx cp .nojekyll docs/.nojekyll"
   },

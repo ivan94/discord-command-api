@@ -7,3 +7,13 @@ var ArgType;
     ArgType[ArgType["BOOLEAN"] = 2] = "BOOLEAN";
 })(ArgType = exports.ArgType || (exports.ArgType = {}));
 ;
+var Command = (function () {
+    function Command(keyword) {
+        this.keyword = keyword;
+    }
+    Command.prototype.description = function () {
+        return "";
+    };
+    return Command;
+}());
+exports["default"] = Command;

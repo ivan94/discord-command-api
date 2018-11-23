@@ -1,4 +1,4 @@
-import ICommand, { ArgSignature, ArgType } from "../src/ICommand";
+import Command, { ArgSignature, ArgType } from "../src/Command";
 import { should } from "chai";
 import CommandPool from "../src/CommandPool";
 import { InvalidTypeError, InvalidCallError } from "../src/Errors";
@@ -17,12 +17,8 @@ interface CommandArg {
     arg3: boolean;
 };
 
-class TestCommand implements ICommand<Mock> {
-    readonly keyword: string;
-
-    constructor(keyword: string) {
-        this.keyword = keyword;
-    }
+class TestCommand extends Command<Mock> {
+    constructor(keyword: string) { super(keyword) }
 
     signature():ArgSignature[] {
         return [

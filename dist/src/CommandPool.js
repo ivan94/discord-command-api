@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-var ICommand_1 = require("./ICommand");
+var Command_1 = require("./Command");
 var Errors_1 = require("./Errors");
 var CommandPool = (function () {
     function CommandPool(markers) {
@@ -46,14 +46,14 @@ var CommandPool = (function () {
     };
     CommandPool.prototype.convertArg = function (value, type) {
         switch (type) {
-            case ICommand_1.ArgType.BOOLEAN:
+            case Command_1.ArgType.BOOLEAN:
                 if (value != 'true' && value != 'false') {
                     throw new Errors_1.InvalidCallError(value + " should be boolean");
                 }
                 return value == 'true';
-            case ICommand_1.ArgType.STRING:
+            case Command_1.ArgType.STRING:
                 return value;
-            case ICommand_1.ArgType.NUMBER:
+            case Command_1.ArgType.NUMBER:
                 var result = Number(value);
                 if (isNaN(result)) {
                     throw new Errors_1.InvalidCallError(value + " should be a number");
