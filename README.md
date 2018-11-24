@@ -1,7 +1,7 @@
 # Discord Commands
 A simple architecture for the commands of a discord bot
 
-![Build Status](https://travis-ci.org/ivan94/discord-commands.svg)
+![Build Status](https://travis-ci.org/ivan94/discord-command-api.svg)
 
 ## Development Notice
 This package is still under active development, so keep in mind that until 1.0.0 is released the api is subject to change in any release.
