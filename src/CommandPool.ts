@@ -10,11 +10,11 @@ export default class CommandPool<BotRef> {
     private markers: string[];
 
     constructor(markers: string[]) {
-        this.markers = markers;
+        this.markers = markers.filter((s => s.match(/^\s*$/) === null));
     }
 
     public register(command: ICommand<BotRef>): void {
-        if(this.commands[command.keyword]) {
+        if (this.commands[command.keyword]) {
             throw new KeywordBoundError;
         }
 
@@ -22,12 +22,12 @@ export default class CommandPool<BotRef> {
     }
 
     public runFromMessage(message: string, ref: BotRef): void {
-        if(!message) {
+        if (!message) {
             return;
         }
 
         let cleanMessage = this.removeMarker(message);
-        if(cleanMessage) {
+        if (cleanMessage) {
             let words = cleanMessage.split(/\s/);
             let keyword = words[0];
 
@@ -42,24 +42,24 @@ export default class CommandPool<BotRef> {
     private buildArgs(command: ICommand<BotRef>, words: string[]): object {
         try {
             let signature = command.signature();
-            let args: {[name: string]: string | boolean | number} = {};
-            if(signature.length != (words.length - 1)){
+            let args: { [name: string]: string | boolean | number } = {};
+            if (signature.length != (words.length - 1)) {
                 throw new InvalidCallError("Arguments don't match the signature");
             }
             signature.forEach((arg, i) => {
                 args[arg.name] = this.convertArg(words[i + 1], arg.type);
             });
 
-            return args;   
+            return args;
         } catch (error) {
             throw new InvalidCallError(error);
         }
     }
 
     private convertArg(value: string, type: ArgType): boolean | string | number {
-        switch(type) {
+        switch (type) {
             case ArgType.BOOLEAN:
-                if(value != 'true' && value != 'false') {
+                if (value != 'true' && value != 'false') {
                     throw new InvalidCallError(`${value} should be boolean`)
                 }
                 return value == 'true';
@@ -67,7 +67,7 @@ export default class CommandPool<BotRef> {
                 return value;
             case ArgType.NUMBER:
                 let result = Number(value);
-                if(isNaN(result)) {
+                if (isNaN(result)) {
                     throw new InvalidCallError(`${value} should be a number`);
                 }
                 return result;
@@ -77,7 +77,7 @@ export default class CommandPool<BotRef> {
     }
 
     private removeMarker(message: string): string {
-        return this.markers.reduce((acc, marker) => message.startsWith(marker)? message.substring(marker.length): acc, null);
+        return this.markers.reduce((acc, marker) => message.startsWith(marker) ? message.substring(marker.length) : acc, null);
     }
 
 }

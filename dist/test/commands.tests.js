@@ -55,41 +55,102 @@ var TestCommand = (function (_super) {
     };
     return TestCommand;
 }(Command_1["default"]));
-describe("Testing the command pool", function () {
-    var bot = new Mock;
-    var command = new TestCommand("test");
-    var pool = new CommandPool_1["default"](["!"]);
+var DidRunCommand = (function (_super) {
+    __extends(DidRunCommand, _super);
+    function DidRunCommand() {
+        return _super.call(this, 'didrun') || this;
+    }
+    DidRunCommand.prototype.signature = function () { return []; };
+    ;
+    DidRunCommand.prototype.execute = function (_a, obj) {
+        obj.didRun = true;
+    };
+    return DidRunCommand;
+}(Command_1["default"]));
+var bot = new Mock;
+var command = new TestCommand("test");
+var pool = new CommandPool_1["default"](["!"]);
+var reset = function () {
+    bot = new Mock;
+    command = new TestCommand("test");
+    pool = new CommandPool_1["default"](["!"]);
     pool.register(command);
-    it("should run with the correct arguments", function () {
-        pool.runFromMessage("!test test 3 false", bot);
-        bot.result1.should.be.equal("test");
-        bot.result2.should.be.equal(3);
-        bot.result3.should.be["false"];
+};
+describe("Command Pool", function () {
+    describe("#register", function () {
+        it("should register a command", function () {
+            var pool = new CommandPool_1["default"](["!"]);
+            pool.register(new TestCommand("test"));
+            Object.keys(pool.commands).length.should.be.equal(1);
+        });
+        it("should register multiple commands", function () {
+            var pool = new CommandPool_1["default"](["!"]);
+            pool.register(new TestCommand("test"));
+            pool.register(new TestCommand("test2"));
+            Object.keys(pool.commands).length.should.be.equal(2);
+        });
+        it("should not register two commands with the same keyword", function () {
+            var pool = new CommandPool_1["default"](["!"]);
+            pool.register(new TestCommand("test"));
+            var wrongCall = function () { return pool.register(new TestCommand("test")); };
+            wrongCall.should["throw"]();
+        });
     });
-    it("should not run with invalid number type", function () {
-        var wrongCall = function () { return pool.runFromMessage("!test test eight true", bot); };
-        wrongCall.should["throw"]();
-    });
-    it("should not run with invalid boolean type", function () {
-        var wrongCall = function () { return pool.runFromMessage("!test test 8 notbool", bot); };
-        wrongCall.should["throw"]();
-    });
-    it("should not run with fewer args", function () {
-        var wrongCall = function () { return pool.runFromMessage("!test test 5", bot); };
-        wrongCall.should["throw"]();
-    });
-    it("should not run with too many args", function () {
-        var wrongCall = function () { return pool.runFromMessage("!test test 2 true another", bot); };
-        wrongCall.should["throw"]();
-    });
-    it("should register two multiple commands with different keywords", function () {
-        var anotherCommand = new TestCommand('test2');
-        pool.register(anotherCommand);
-        Object.keys(pool.commands).length.should.be.equal(2);
-    });
-    it("should not register two commands with the same keyword", function () {
-        var anotherCommand = new TestCommand('test');
-        var wrongCall = function () { return pool.register(anotherCommand); };
-        wrongCall.should["throw"]();
+    describe("#runFromMessage", function () {
+        it("should not run regular messages", function () {
+            var pool = new CommandPool_1["default"](["!"]);
+            pool.register(new DidRunCommand);
+            var o = { didRun: false };
+            pool.runFromMessage('Regular another common message', o);
+            o.didRun.should.be["false"];
+        });
+        it("should run non arguments command", function () {
+            var pool = new CommandPool_1["default"](["!"]);
+            pool.register(new DidRunCommand);
+            var o = { didRun: false };
+            pool.runFromMessage('!didrun', o);
+            o.didRun.should.be["true"];
+        });
+        it("should not run when marker list is empty", function () {
+            var pool = new CommandPool_1["default"]([]);
+            pool.register(new DidRunCommand);
+            var o = { didRun: false };
+            pool.runFromMessage('!didrun', o);
+            o.didRun.should.be["false"];
+        });
+        it("should not run when marker list contains only one empty string", function () {
+            var pool = new CommandPool_1["default"]([""]);
+            pool.register(new DidRunCommand);
+            var o = { didRun: false };
+            pool.runFromMessage('!didrun', o);
+            o.didRun.should.be["false"];
+        });
+        it("should run with the correct arguments", function () {
+            reset();
+            pool.runFromMessage("!test test 3 false", bot);
+            bot.result1.should.be.equal("test");
+            bot.result2.should.be.equal(3);
+            bot.result3.should.be["false"];
+        });
+        it("should throw error with invalid number type", function () {
+            reset();
+            var wrongCall = function () { return pool.runFromMessage("!test test eight true", bot); };
+            wrongCall.should["throw"]();
+        });
+        it("should throw error with invalid boolean type", function () {
+            reset();
+            var wrongCall = function () { return pool.runFromMessage("!test test 8 notbool", bot); };
+            wrongCall.should["throw"]();
+        });
+        it("should throw error with fewer args", function () {
+            reset();
+            var wrongCall = function () { return pool.runFromMessage("!test test 5", bot); };
+            wrongCall.should["throw"]();
+        });
+        it("should throw error with too many args", function () {
+            reset();
+            var wrongCall = function () { return pool.runFromMessage("!test test 2 true another", bot); };
+            wrongCall.should["throw"]();
+        });
     });
 });

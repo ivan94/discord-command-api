@@ -5,7 +5,7 @@ var Errors_1 = require("./Errors");
 var CommandPool = (function () {
     function CommandPool(markers) {
         this.commands = {};
-        this.markers = markers;
+        this.markers = markers.filter((function (s) { return s.match(/^\s*$/) === null; }));
     }
     CommandPool.prototype.register = function (command) {
         if (this.commands[command.keyword]) {
