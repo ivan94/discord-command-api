@@ -2,6 +2,10 @@
 A simple architecture for the commands of a discord bot
 
 ![Build Status](https://travis-ci.org/ivan94/discord-command-api.svg)
+![Version](https://img.shields.io/npm/v/discord-command-api.svg)
+![NPM downloads](https://img.shields.io/npm/dt/discord-command-api.svg)
+![Dependencies](https://david-dm.org/ivan94/discord-command-api.svg)
+
 
 ## Development Notice
 This package is still under active development, so keep in mind that until 1.0.0 is released the api is subject to change in any release.
