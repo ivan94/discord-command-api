@@ -1,6 +1,6 @@
 {
   "name": "discord-command-api",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A simple architecture for commands of a discord bot",
   "main": "dist/src/index.js",
   "types": "dist/types/src/index.d.ts",
@@ -38,7 +38,7 @@
     "@types/mocha": "^5.2.5",
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
-    "npm-run-all": "^4.1.3",
+    "npm-run-all": "^4.1.5",
     "shx": "^0.3.2",
     "ts-node": "^7.0.1",
     "typedoc": "^0.13.0",
