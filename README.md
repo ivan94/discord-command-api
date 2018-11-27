@@ -1,10 +1,20 @@
-# Discord Commands
+# Discord Command API
 A simple architecture for the commands of a discord bot
 
 ![Build Status](https://travis-ci.org/ivan94/discord-command-api.svg)
 ![Version](https://img.shields.io/npm/v/discord-command-api.svg)
 ![NPM downloads](https://img.shields.io/npm/dt/discord-command-api.svg)
 ![Dependencies](https://david-dm.org/ivan94/discord-command-api.svg)
+
+- [Discord Command API](#discord-command-api)
+    - [Development Notice](#development-notice)
+    - [Getting Started](#getting-started)
+        - [Creating Commands](#creating-commands)
+            - [Examples](#examples)
+        - [Running the CommandPool](#running-the-commandpool)
+            - [Examples](#examples-1)
+    - [Documentation](#documentation)
+    - [Contributing](#contributing)
 
 
 ## Development Notice
@@ -142,6 +152,10 @@ try{
     //An error is thrown if the passed arguments don't meet the command signature
 }
 ```
+
+## Documentation
+
+The documentation can be found [here](https://ivan94.github.io/discord-command-api/).
 
 ## Contributing
 You are welcome to for the repo and send pull requests with any bug fixes or features you like, but please make sure to:
