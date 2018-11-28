@@ -145,6 +145,15 @@ describe("Command Pool", () => {
             bot.result3.should.be.false;
         });
 
+        it("should run with the a quoted long string argument", () => {
+            reset();
+            pool.runFromMessage("!test 'testing a long string' 3 false", bot);
+
+            bot.result1.should.be.equal("testing a long string");
+            bot.result2.should.be.equal(3);
+            bot.result3.should.be.false;
+        });
+
         it("should throw error with invalid number type", () => {
             reset();
             let wrongCall = () => pool.runFromMessage("!test test eight true", bot);

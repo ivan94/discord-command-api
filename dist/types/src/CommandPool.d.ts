@@ -8,7 +8,7 @@ export default class CommandPool<BotRef> {
     constructor(markers: string[]);
     register(command: ICommand<BotRef>): void;
     runFromMessage(message: string, ref: BotRef): void;
-    run(command: ICommand<BotRef>, words: string[], ref: BotRef): void;
+    run(command: ICommand<BotRef>, argv: string[], ref: BotRef): void;
     private buildArgs;
     private convertArg;
     private removeMarker;

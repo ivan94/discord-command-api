@@ -1,3 +1,5 @@
+import stringArgv = require('string-argv');
+
 import ICommand, { ArgType } from "./Command";
 import { KeywordBoundError, InvalidCallError, InvalidTypeError } from "./Errors";
 
@@ -28,26 +30,26 @@ export default class CommandPool<BotRef> {
 
         let cleanMessage = this.removeMarker(message);
         if (cleanMessage) {
-            let words = cleanMessage.split(/\s/);
-            let keyword = words[0];
+            let argv = stringArgv(cleanMessage)
+            let keyword = argv[0];
 
-            this.run(this.commands[keyword], words, ref);
+            this.run(this.commands[keyword], argv, ref);
         }
     }
 
-    public run(command: ICommand<BotRef>, words: string[], ref: BotRef): void {
-        command.execute(this.buildArgs(command, words), ref);
+    public run(command: ICommand<BotRef>, argv: string[], ref: BotRef): void {
+        command.execute(this.buildArgs(command, argv), ref);
     }
 
-    private buildArgs(command: ICommand<BotRef>, words: string[]): object {
+    private buildArgs(command: ICommand<BotRef>, argv: string[]): object {
         try {
             let signature = command.signature();
             let args: { [name: string]: string | boolean | number } = {};
-            if (signature.length != (words.length - 1)) {
+            if (signature.length != (argv.length - 1)) {
                 throw new InvalidCallError("Arguments don't match the signature");
             }
             signature.forEach((arg, i) => {
-                args[arg.name] = this.convertArg(words[i + 1], arg.type);
+                args[arg.name] = this.convertArg(argv[i + 1], arg.type);
             });
 
             return args;

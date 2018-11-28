@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+var stringArgv = require("string-argv");
 var Command_1 = require("./Command");
 var Errors_1 = require("./Errors");
 var CommandPool = (function () {
@@ -19,24 +20,24 @@ var CommandPool = (function () {
         }
         var cleanMessage = this.removeMarker(message);
         if (cleanMessage) {
-            var words = cleanMessage.split(/\s/);
-            var keyword = words[0];
-            this.run(this.commands[keyword], words, ref);
+            var argv = stringArgv(cleanMessage);
+            var keyword = argv[0];
+            this.run(this.commands[keyword], argv, ref);
         }
     };
-    CommandPool.prototype.run = function (command, words, ref) {
-        command.execute(this.buildArgs(command, words), ref);
+    CommandPool.prototype.run = function (command, argv, ref) {
+        command.execute(this.buildArgs(command, argv), ref);
     };
-    CommandPool.prototype.buildArgs = function (command, words) {
+    CommandPool.prototype.buildArgs = function (command, argv) {
         var _this = this;
         try {
             var signature = command.signature();
             var args_1 = {};
-            if (signature.length != (words.length - 1)) {
+            if (signature.length != (argv.length - 1)) {
                 throw new Errors_1.InvalidCallError("Arguments don't match the signature");
             }
             signature.forEach(function (arg, i) {
-                args_1[arg.name] = _this.convertArg(words[i + 1], arg.type);
+                args_1[arg.name] = _this.convertArg(argv[i + 1], arg.type);
             });
             return args_1;
         }

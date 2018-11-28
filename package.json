@@ -1,6 +1,6 @@
 {
   "name": "discord-command-api",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "A simple architecture for commands of a discord bot",
   "main": "dist/src/index.js",
   "types": "dist/types/src/index.d.ts",
@@ -43,5 +43,9 @@
     "ts-node": "^7.0.1",
     "typedoc": "^0.13.0",
     "typescript": "^3.1.6"
+  },
+  "dependencies": {
+    "@types/string-argv": "^0.1.0",
+    "string-argv": "^0.1.1"
   }
 }
